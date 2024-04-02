@@ -26,7 +26,7 @@ def init_llm():
 
 
 def init_index(embed_model):
-    reader = SimpleDirectoryReader(input_dir="./docs", recursive=True)
+    reader = SimpleDirectoryReader("./docs")
     documents = reader.load_data()
 
     logging.info("index creating with `%d` documents", len(documents))
