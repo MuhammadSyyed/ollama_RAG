@@ -18,7 +18,7 @@ global query_engine
 query_engine = None
 
 def init_llm():
-    llm = Ollama(model="llama2", request_timeout=300.0)
+    llm = Ollama(model="phi3", request_timeout=300.0)
     embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
 
     Settings.llm = llm
