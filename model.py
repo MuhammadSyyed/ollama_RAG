@@ -4,18 +4,21 @@ import sys
 
 from llama_index.llms.ollama import Ollama
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from llama_index.core import (Settings, VectorStoreIndex, SimpleDirectoryReader, PromptTemplate)
+from llama_index.core import (
+    Settings, VectorStoreIndex, SimpleDirectoryReader, PromptTemplate)
 from llama_index.core import StorageContext
 from llama_index.vector_stores.chroma import ChromaVectorStore
 
 import logging
 import sys
 
-logging.basicConfig(stream=sys.stdout, level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(stream=sys.stdout, level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 global query_engine
 query_engine = None
+
 
 def init_llm():
     llm = Ollama(model="phi3", request_timeout=300.0)
@@ -40,7 +43,8 @@ def init_index(embed_model):
     # use this to set custom chunk size and splitting
     # https://docs.llamaindex.ai/en/stable/module_guides/loading/node_parsers/
 
-    index = VectorStoreIndex.from_documents(documents, storage_context=storage_context, embed_model=embed_model)
+    index = VectorStoreIndex.from_documents(
+        documents, storage_context=storage_context, embed_model=embed_model)
 
     return index
 
@@ -49,25 +53,30 @@ def init_query_engine(index):
     global query_engine
 
     # custome prompt template
-    template = (
-        "Imagine you are an advanced AI expert in cyber security laws, with access to all current and relevant legal documents, "
-        "case studies, and expert analyses. Your goal is to provide insightful, accurate, and concise answers to questions in this domain.\n\n"
-        "Here is some context related to the query:\n"
-        "-----------------------------------------\n"
-        "{context_str}\n"
-        "-----------------------------------------\n"
-        "Considering the above information, please respond to the following inquiry with detailed references to applicable laws, "
-        "precedents, or principles where appropriate:\n\n"
-        "Question: {query_str}\n\n"
-        "Answer succinctly, starting with the phrase 'According to cyber security law,' and ensure your response is understandable to someone without a legal background."
-    )
+    template = """
+                Imagine you are an advanced AI sales bot named 'Freshie' for business EcoFresh, specializing in eco-friendly and sustainable household products. Your goal is to provide helpful, accurate, and concise answers to customer inquiries, using up-to-date information about EcoFresh's products and sustainability initiatives.
+
+                Here is some context related to the query:
+                -----------------------------------------
+                {context_str}
+                -----------------------------------------
+                Considering the above information, please respond to the following customer inquiry with detailed references to EcoFresh's product offerings, sustainability practices, or company values where appropriate:
+
+                **Note:** If the inquiry includes greetings or casual conversation, acknowledge them briefly and then focus on providing a precise and relevant answer to the main question.
+
+                Question: {query_str}
+
+                Ensure your response is clear and easy to understand for all customers and have maximum 2 sentences.
+                """
+
     qa_template = PromptTemplate(template)
 
     # build query engine with custom template
     # text_qa_template specifies custom template
     # similarity_top_k configure the retriever to return the top 3 most similar documents,
     # the default value of similarity_top_k is 2
-    query_engine = index.as_query_engine(text_qa_template=qa_template, similarity_top_k=3)
+    query_engine = index.as_query_engine(
+        text_qa_template=qa_template, similarity_top_k=3)
 
     return query_engine
 
