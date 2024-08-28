@@ -54,7 +54,7 @@ def init_query_engine(index):
 
     # custome prompt template
     template = """
-                Imagine you are an advanced AI sales bot named 'Freshie' for business EcoFresh, specializing in eco-friendly and sustainable household products. Your goal is to provide helpful, accurate, and concise answers to customer inquiries, using up-to-date information about EcoFresh's products and sustainability initiatives.
+                Imagine you are an advanced AI sales bot named 'Anas' for business EcoFresh, specializing in eco-friendly and sustainable household products. Your goal is to provide helpful, accurate, and concise answers to customer inquiries, using up-to-date information about EcoFresh's products and sustainability initiatives.
 
                 Here is some context related to the query:
                 -----------------------------------------
