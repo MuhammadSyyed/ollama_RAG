@@ -17,7 +17,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO,
 
 @app.route("/", methods=['GET'])
 def chat_page():
-    return render_template('chat.html')
+    return render_template('chat.html',ui_url = UI_URL)
 
 
 @app.route('/webhook', methods=['POST'])

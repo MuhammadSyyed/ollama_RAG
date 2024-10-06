@@ -4,36 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Page Title</title>
-    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <title>Sales Bot</title>
+    <style>
+        body {
+            background-color: #FF6F61;
+            /* Peachy red */
+            color: white;
+            font-size: 48px;
+            font-family: Calibri, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: left;
+            margin: 20px;
+            padding-left: 60px;
+            padding-top: 100px;
+        }
+    </style>
 </head>
 
 <body>
-    <header>
-        <h1>Welcome to My Website</h1>
-    </header>
-
-    <main>
-        <p>This is a paragraph of text on my website.</p>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Your Name. All rights reserved.</p>
-    </footer>
-
-    <!-- <script src="scripts.js"></script> -->
-
-    <!-- Start of Rocket.Chat Livechat Script -->
-
+    <h1>Welcome to<br>Eco Fresh<br>Sales bot</h1>
     <script type="text/javascript">
         (function (w, d, s, u) {
             w.RocketChat = function (c) { w.RocketChat._.push(c) }; w.RocketChat._ = []; w.RocketChat.url = u;
             var h = d.getElementsByTagName(s)[0], j = d.createElement(s);
             j.async = true; j.src = 'static/js/rocketchat-livechat.min.js';
             h.parentNode.insertBefore(j, h);
-        })(window, document, 'script', 'http://localhost:3000/livechat');
+        })(window, document, 'script', `${'{{ui_url}}'}/livechat`);
     </script>
-
 </body>
 
 </html>
